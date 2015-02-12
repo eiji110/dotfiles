@@ -1,0 +1,31 @@
+# shell
+shell zsh
+
+# エンコーディング
+defkanji utf-8
+defencoding utf-8
+encoding utf-8 utf-8
+
+# Prefixキーの設定
+escape ^Zz
+# キーバインド
+bind n screen
+bind h prev
+bind j next
+bind l windowlist
+
+# オートデタッチ
+autodetach on
+
+# logging
+
+# ビジュアルベルをoffにする。
+vbell off
+bell_msg "^G"
+
+defscrollback 10000
+startup_message on
+
+# 画面下の表示
+caption always "%{= wb} %-w%{=bu dr}%n %t%{-}%+w %= %{=b wk} [%l] %{=b wb}%y/%m/%d %{=b wm}%c"
+
