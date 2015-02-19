@@ -207,7 +207,9 @@ set noswapfile
 set nobackup
 " undo情報ファイルを作成しない
 set noundofile
-
+if exists('g:loaded_pluginname') || (v:version < 700)
+    finish
+endif
 " ファイル名に大文字小文字の区別がないシステム用の設定:
 "   (例: DOS/Windows/MacOS)
 "
