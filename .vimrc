@@ -329,8 +329,13 @@ imap <C-Space> <C-x><C-o>
 
 " netrw
 noremap <C-f> :<C-u>Explore<CR>
-
+" outline
 noremap <C-o> :<C-u>vimgrep function % \| cw<CR><C-w>b<
+" date “ü—Í
+noremap <Leader>d <ESC>a<C-R>=strftime("%Y/%m/%d (%a)")<ESC><ESC>
+" time “ü—Í
+noremap <Leader>t <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M")<ESC><ESC>
+
 
 " Plugin
 """--------------------------------------------------------------------------
