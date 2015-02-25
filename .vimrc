@@ -276,31 +276,6 @@ autocmd FileType php :setlocal dictionary=~/.vim/dict/php.dict
 """ ƒwƒ‹ƒv-------------------------------------------------------------------
 set helplang=ja,en
 
-""" ƒXƒNƒ[ƒ‹----------
-" Use vsplit mode
-" if has("vim_starting") && !has('gui_running') && has('vertsplit')
-"     function! g:EnableVsplitMode()
-"         " enable origin mode and left/right margins
-"         let &t_CS = "y"
-"         let &t_ti = &t_ti . "\e[?6;69h"
-"         " let &t_te .= "\e7\e[?6;69l\e8"
-"         " ’[––‚Ì‘ã‘ÖƒXƒNƒŠ[ƒ“‚ğg‚í‚È‚¢İ’è‚É‚µ‚Ä‚¢‚él
-"         let &t_te = "\e[?6;69l" . &t_te
-"         let &t_CV = "\e[%i%p1%d;%p2%ds"
-"         call writefile([ "\e[?6h\e[?69h" ], "/dev/tty", "a")
-"     endfunction
-" 
-"     " old vim does not ignore CPR
-"     map <special> <Esc>[3;9R <Nop>
-" 
-"     " new vim can't handle CPR with direct mapping
-"     " map <expr> ^[[3;3R
-"     g:EnableVsplitMode()
-"     set t_F9=[3;3R
-"     map <expr> <t_F9>
-"     g:EnableVsplitMode()
-"     let &t_RV .= "\e[?6;69h\e[1;3s\e[3;9H\e[6n\e[0;0s\e[?6;69l"
-" endif
 """ ‚»‚Ì‘¼İ’è---------------------------------------------------------------
 " ƒoƒbƒtƒ@‚ğØ‘Ö‚¦‚Ä‚àundo‚ÌŒø—Í‚ğ¸‚í‚È‚¢
 set hidden
@@ -330,8 +305,27 @@ imap <C-Space> <C-x><C-o>
 
 " netrw
 noremap <C-f> :<C-u>Explore<CR>
+
 " outline
-noremap <C-o> :<C-u>vimgrep function % \| cw<CR><C-w>b<
+autocmd FileType php call s:eu_outline_setting_php()
+autocmd FileType markdown call s:eu_outline_setting_markdown()
+autocmd FileType markdown call s:eu_outline_setting_markdown()
+autocmd FileType qf nnoremap <buffer> <Leader><CR> :cclose<CR>
+
+function! s:eu_outline_setting_php()
+    noremap <buffer> <C-o> :<C-u>vimgrep function % \| cw<CR><C-w>b<
+endfunction
+
+function! s:eu_outline_setting_markdown()
+    noremap <buffer> <C-o> :<C-u>vimgrep /^#/ % \| cw<CR><C-w>b<
+endfunction
+
+"augroup vimrc_loading
+" autocmd!
+" autocmd FileType php setlocal expandtab shiftwidth=2
+" autocmd BufNewFile * put ='ËŞÑ©'
+"augroup END
+"
 " date “ü—Í
 noremap <Leader>d <ESC>a<C-R>=strftime("%Y/%m/%d (%a)")<ESC><ESC>
 " time “ü—Í
@@ -425,70 +419,72 @@ endif
 "
 " OS‚Å•ªŠò
 "
-"     has()‚ğg‚¤B
-"         ³‚µ‚¢Œ‹‰Ê‚ğ•Ô‚µ‚Ä‚­‚ê‚È‚­‚Ä‚à‹ƒ‚©‚È‚¢B
+" has()‚ğg‚¤B
+" ³‚µ‚¢Œ‹‰Ê‚ğ•Ô‚µ‚Ä‚­‚ê‚È‚­‚Ä‚à‹ƒ‚©‚È‚¢B
 "
-"         if has("unix")
-"             " UNIXŠÂ‹«—p‚ÌƒR[ƒh
-"             elsef has('mac')
-"                 " Mac—p‚ÌƒR[ƒh
-"                 elseif has("win32")
-"                     " WindowsŠÂ‹«—p‚ÌƒR[ƒh
-"                     endif
+" if has("unix")
+"" UNIXŠÂ‹«—p‚ÌƒR[ƒh
+" elsef has('mac')
+" " Mac—p‚ÌƒR[ƒh
+" elseif has("win32")
+" " WindowsŠÂ‹«—p‚ÌƒR[ƒh
+" endif
 "
-"                     GUI‚©ACUI‚©‚Å•ªŠò
+" GUI‚©ACUI‚©‚Å•ªŠò
 "
-"                         gui_running‚ğƒ`ƒFƒbƒN‚·‚éB
+" gui_running‚ğƒ`ƒFƒbƒN‚·‚éB
 "
-"                         if has("gui_running")
-"                            " GUI”ÅVim—p‚ÌƒR[ƒh
-"                            else
-"                               " CUI”ÅVim—p‚ÌƒR[ƒh
-"                               endif
+" if has("gui_running")
+"" GUI”ÅVim—p‚ÌƒR[ƒh
+" else
+"" CUI”ÅVim—p‚ÌƒR[ƒh
+" endif
 "
-"                               ƒRƒ“ƒpƒCƒ‹ƒIƒvƒVƒ‡ƒ“‚È‚Ç‚Å•ªŠò
+" ƒRƒ“ƒpƒCƒ‹ƒIƒvƒVƒ‡ƒ“‚È‚Ç‚Å•ªŠò
 "
-"                                   “¯‚¶‚­Ahas()‚ğg‚¤B
+" “¯‚¶‚­Ahas()‚ğg‚¤B
 "
-"                                   :version
-"                                   " #=> VIM - Vi IMproved 7.2 (2008 Aug 9,
-"                                   compiled Mar 25 2010 01:10:31)
-"                                   " #=> MS-Windows 64 ƒrƒbƒg GUI ”Å
-"                                   " #=> “K—pÏƒpƒbƒ`: 1-411
-"                                   " #=> Modified by koron.kaoriya@gmail.com
-"                                   " #=> Compiled by koron.kaoriya@gmail.com
-"                                   " #=> Big ”Å with GUI.  ‹@”\‚Ìˆê—— —LŒø
-"                                   (+)/–³Œø(-)
-"                                   " #=> +arabic +autocmd +balloon_eval
-"                                   +browse ++builtin_terms +byte_offset
-"                                   +cindent +clientserver +clipboard
-"                                   +cmdline_compl
-"                                   " #=> +cmdline_hist +cmdline_info
-"                                   +comments +cryptv +cscope +cursorshape
-"                                   +dialog_con_gui +diff +digraphs -dnd
-"                                   -ebcdic
-"                                   " #=> +emacs_tags +eval +ex_extra
-"                                   +extra_search +farsi +file_in_path
-"                                   +find_in_path +float +folding -footer
-"                                   +gettext/dyn
-"                                   " #=> ....
+" :version
+"" #=> VIM - Vi IMproved 7.2 (2008 Aug 9,
+" compiled Mar 25 2010 01:10:31)
+"" #=> MS-Windows 64 ƒrƒbƒg GUI ”Å
+"" #=> “K—pÏƒpƒbƒ`: 1-411
+"" #=> Modified by koron.kaoriya@gmail.com
+"" #=> Compiled by koron.kaoriya@gmail.com
+"" #=> Big ”Å with GUI.  ‹@”\‚Ìˆê—— —LŒø
+" (+)/–³Œø(-)
+"" #=> +arabic +autocmd +balloon_eval
+" +browse ++builtin_terms +byte_offset
+" +cindent +clientserver +clipboard
+" +cmdline_compl
+" " #=> +cmdline_hist +cmdline_info
+" +comments +cryptv +cscope +cursorshape
+" +dialog_con_gui +diff +digraphs -dnd
+" -ebcdic
+" " #=> +emacs_tags +eval +ex_extra
+" +extra_search +farsi +file_in_path
+" +find_in_path +float +folding -footer
+" +gettext/dyn
+" " #=> ....
 "
-"                                       clipboard‚ªg‚¦‚é‚©A‚Ç‚¤‚©‚Å•ªŠò
+" clipboard‚ªg‚¦‚é‚©A‚Ç‚¤‚©‚Å•ªŠò
 "
-"                                       if has("clipboard")
-"                                          " clipboard‚ğg‚¤ƒR[ƒh
-"                                          endif
+" if has("clipboard")
+" " clipboard‚ğg‚¤ƒR[ƒh
+" endif
 "
-"                                          •Ï”‚Å•ªŠò
+" •Ï”‚Å•ªŠò
 "
-"                                              exists()‚ğg‚¤B
-"                                                  ƒvƒ‰ƒOƒCƒ“‚ª“ü‚Á‚Ä‚¢‚é‚©‚¢
-"                                                  ‚È‚¢‚©A‚Ì”»’f‚Ég‚¦‚é‚±‚Æ
-"                                                  ‚ª‘½‚¢B
+" exists()‚ğg‚¤B
+" ƒvƒ‰ƒOƒCƒ“‚ª“ü‚Á‚Ä‚¢‚é‚©‚¢‚È‚¢‚©A‚Ì”»’f‚Ég‚¦‚é‚±‚Æ‚ª‘½‚¢B
 "
-"                                                  if exists("$LANG")
-"                                                     " LANGŠÂ‹«•Ï”‚ªİ’è‚³‚ê
-"                                                     ‚Ä‚¢‚éê‡‚ÌƒR[ƒh
-"                                                     endif
+" if exists("$LANG")
+" " LANGŠÂ‹«•Ï”‚ªİ’è‚³‚ê‚Ä‚¢‚éê‡‚ÌƒR[ƒh
+" endif
 "
+" event
+" augroup vimrc_loading
+"  autocmd!
+"  autocmd BufNewFile * put ='ËŞÑ©'
+" augroup END
 "
