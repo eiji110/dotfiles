@@ -489,5 +489,5 @@ endif
 " augroup END
 ""--------------------------ƒtƒ@ƒCƒ‹‚Ìí—Ş‚²‚Æ‚Ìİ’è
 "" smarty
-autocmd FileType smarty set noexpandtab tabstop=4 shiftwidth=4
+autocmd FileType smarty setlocal noexpandtab tabstop=4 shiftwidth=4
 
