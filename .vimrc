@@ -313,11 +313,11 @@ autocmd FileType javascript noremap <buffer> <C-o> :<C-u>vimgrep function % \| c
 autocmd FileType qf nnoremap <buffer> <Leader><CR> :cclose<CR>
 
 function! s:eu_outline_setting_php()
-    noremap <buffer> <C-o> :<C-u>vimgrep function % \| cw<CR><C-w>b<
+    noremap <buffer> <C-o> :<C-u>vimgrep function % \| cw<CR><C-w>b
 endfunction
 
 function! s:eu_outline_setting_markdown()
-    noremap <buffer> <C-o> :<C-u>vimgrep /^#/ % \| cw<CR><C-w>b<
+    noremap <buffer> <C-o> :<C-u>vimgrep /^#/ % \| cw<CR><C-w>b
 endfunction
 
 "augroup vimrc_loading
@@ -490,4 +490,10 @@ endif
 ""--------------------------ÉtÉ@ÉCÉãÇÃéÌóﬁÇ≤Ç∆ÇÃê›íË
 "" smarty
 autocmd FileType smarty setlocal noexpandtab tabstop=4 shiftwidth=4
+
+"" html
+autocmd FileType html setlocal noexpandtab tabstop=4 shiftwidth=4
+
+"" javascript
+"" autocmd FileType javascript setlocal noexpandtab tabstop=4 shiftwidth=4
 
