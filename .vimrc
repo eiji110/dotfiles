@@ -310,7 +310,7 @@ noremap <C-f> :<C-u>Explore<CR>
 autocmd FileType php call s:eu_outline_setting_php()
 autocmd FileType markdown call s:eu_outline_setting_markdown()
 autocmd FileType javascript noremap <buffer> <C-o> :<C-u>vimgrep function % \| cw<CR><C-w>b
-autocmd FileType qf nnoremap <buffer> <Leader><CR> :cclose<CR>
+autocmd FileType qf nnoremap <buffer> <C-o> <CR>:<C-u>cclose<CR>
 
 function! s:eu_outline_setting_php()
     noremap <buffer> <C-o> :<C-u>vimgrep function % \| cw<CR><C-w>b
