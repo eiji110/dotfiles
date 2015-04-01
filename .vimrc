@@ -307,17 +307,15 @@ imap <C-Space> <C-x><C-o>
 noremap <C-f> :<C-u>Explore<CR>
 
 " outline
-autocmd FileType php call s:eu_outline_setting_php()
-autocmd FileType markdown call s:eu_outline_setting_markdown()
-autocmd FileType javascript noremap <buffer> <C-o> :<C-u>vimgrep function % \| cw<CR><C-w>b
-autocmd FileType qf nnoremap <buffer> <C-o> <CR>:<C-u>cclose<CR>
+autocmd FileType qf nnoremap <silent><buffer> <C-o> <CR>:<C-u>cclose<CR>
 
-function! s:eu_outline_setting_php()
-    noremap <buffer> <C-o> :<C-u>vimgrep function % \| cw<CR><C-w>b
-endfunction
+autocmd FileType php noremap <silent><buffer> <C-o> :<C-u>vimgrep function % \| cw<CR><C-w>b
+autocmd FileType javascript noremap <silent><buffer> <C-o> :<C-u>vimgrep function % \| cw<CR><C-w>b
+autocmd FileType sql noremap <silent><buffer> <C-o> :<C-u>vimgrep /\(\/\*\\|--\)/ % \| cw<CR><C-w>b
+autocmd FileType markdown call s:eu_outline_setting_markdown()
 
 function! s:eu_outline_setting_markdown()
-    noremap <buffer> <C-o> :<C-u>vimgrep /^#/ % \| cw<CR><C-w>b
+    noremap <silent><buffer> <C-o> :<C-u>vimgrep /^#/ % \| cw<CR><C-w>b
 endfunction
 
 "augroup vimrc_loading
