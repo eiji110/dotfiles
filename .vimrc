@@ -13,16 +13,11 @@ if has('vim_starting')
   set runtimepath +=$HOME/.vim/bundle/neobundle.vim
 endif
 call neobundle#begin(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
-call neobundle#end()
 " 使いたいプラグインのリポジトリ
-NeoBundle 'Shougo/neobundle.vim'
-"NeoBundle 'Shougo/vimproc'
-"NeoBundle 'thinca/vim-ref'
+NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'rcmdnk/vim-markdown'
 NeoBundle 'tpope/vim-surround'
-"NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'vim-scripts/sudo.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'vim-scripts/vcscommand.vim'
@@ -32,18 +27,15 @@ NeoBundle 'vim-jp/vimdoc-ja'
 
 NeoBundle 'evidens/vim-twig'
 
-"NeoBundle 'Shougo/unite.vim'
-"NeoBundle 'h1mesuke/unite-outline'
+call neobundle#end()
 
  " :NeoBundleList          - list configured bundles
  " :NeoBundleInstall(!)    - install(update) bundles
  " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 filetype plugin indent on
 
-if neobundle#exists_not_installed_bundles()
-	echomsg 'Not installed bundles : ' .string(neobundle#get_not_installed_bundle_names())
-	echomsg 'Please execute ":NeoBundleInstall" command.'
-endif
+NeoBundleCheck
+
 " その他プラグイン----------------------------------------------------------
 source $VIMRUNTIME/macros/matchit.vim
 "-init----------------------------------------------------------------------
