@@ -4,11 +4,16 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # ll ls
-alias ll="ls -la --color=auto"
-alias ls="ls --color=auto"
+if [ $(uname) = "Darwin" ]; then
+    alias ll="ls -laG"
+    alias ls="ls -G"
+elif [ $(uname) = "Linux" ]; then
+    alias ll="ls -la --color=auto"
+    alias ls="ls --color=auto"
+fi
 
-# vi 
-alias vi="vim"
+# vi
+alias vi='vim'
 
 # User specific aliases and functions
 stty stop undef
