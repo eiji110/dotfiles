@@ -124,7 +124,7 @@ set noequalalways
 set wrap
 colorscheme desert
 " ステータスラインに表示する情報の指定
-set statusline=%2*%y\ %n%*\ %<%{winnr('$')>1?winnr().'/'.winnr('$').'\ ':''}%2*%f%1*%(\ [%M%R%H%W]\ %)%*%=\|%c/%P%{&dictionary==''?'':'\|DICT:'.&dictionary}\|%{GetEFstatus()}
+set statusline=%2*%y\ %n%*\ %<%{winnr('$')>1?winnr().'/'.winnr('$').'\ ':''}%2*%f%1*%(\ [%M%R%H%W]\ %)%*%=\|%c/%P\|%{GetEFstatus()}%{fugitive#statusline()}
 
 function! GetEFstatus()
   let str = ''
