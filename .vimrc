@@ -13,8 +13,8 @@ if has('vim_starting')
   set runtimepath +=$HOME/.vim/bundle/neobundle.vim
 endif
 call neobundle#begin(expand('~/.vim/bundle/'))
-" 使いたいプラグインのリポジトリ
 NeoBundleFetch 'Shougo/neobundle.vim'
+" 使いたいプラグインのリポジトリ
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'rcmdnk/vim-markdown'
 NeoBundle 'tpope/vim-surround'
