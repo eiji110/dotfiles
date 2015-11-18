@@ -134,7 +134,7 @@ function! GetEFstatus()
     let str = 'U'
 elseif ff == 'dos'
     let str = 'D'
-elseif ff = 'mac'
+elseif ff == 'mac'
 	let str = 'M'
   endif
   unlet ff
@@ -148,7 +148,7 @@ elseif ff = 'mac'
       let fenc = 'U8'
     elseif fenc == 'cp932'
       let fenc = 'S'
-    elseif fenc =~# 'euc-jp'
+    elseif fenc == 'euc-jp'
       let fenc = 'E'
     else
       let fenc = &fileencoding
