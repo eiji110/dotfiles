@@ -83,8 +83,8 @@ set formatoptions+=mM
 set autoindent
 " タブが対応する空白の数
 set tabstop=4
-" タブやバックスペースの使用等の編集操作をするときに、タブが対応する空白の数
-set softtabstop=4
+" タブやバックスペースの使用等の編集操作をするときに、タブが対応する空白の数(0の場合「tabstop」で指定されている数値が使用される)
+set softtabstop=0
 " インデントの各段階に使われる空白の数
 set shiftwidth=4
 " タブをスペースに展開しない (expandtab:展開する)
@@ -478,12 +478,16 @@ endif
 "  autocmd BufNewFile * put ='ﾋﾞﾑｩ'
 " augroup END
 ""--------------------------ファイルの種類ごとの設定
-"" smarty
-autocmd FileType smarty setlocal noexpandtab tabstop=4 shiftwidth=4
-
-"" html
-autocmd FileType html setlocal noexpandtab tabstop=4 shiftwidth=4
+"" tabstop:ファイル内にあるタブ文字の表示幅。
+"" shiftwidth:自動インデントに使われる空白の数。
+"" softtabstop:タブキー押下時に挿入される文字幅を指定。(0の場合「tabstop」で指定されている数値が使用される)
+"" expandtab:ソフトタブ。ハードタブはnoexpandtab。
 
 "" javascript
 "" autocmd FileType javascript setlocal noexpandtab tabstop=4 shiftwidth=4
+
+" 環境依存や非公開設定ファイルの読み込み
+if filereadable(expand('~/.vimrc.local'))
+source ~/.vimrc.local
+endif
 
