@@ -301,7 +301,7 @@ noremap <C-f> :<C-u>Explore<CR>
 " outline
 autocmd FileType qf nnoremap <silent><buffer> <C-o> <CR>:<C-u>cclose<CR>
 
-autocmd FileType php noremap <silent><buffer> <C-o> :<C-u>vimgrep /^\s*function/ % \| cw<CR><C-w>b
+autocmd FileType php noremap <silent><buffer> <C-o> :<C-u>vimgrep /function/ % \| cw<CR><C-w>b
 autocmd FileType javascript noremap <silent><buffer> <C-o> :<C-u>vimgrep /^\s*function/ % \| cw<CR><C-w>b
 autocmd FileType sql noremap <silent><buffer> <C-o> :<C-u>vimgrep /\(\/\*\\|--\)/ % \| cw<CR><C-w>b
 autocmd FileType markdown call s:eu_outline_setting_markdown()
