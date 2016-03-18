@@ -64,9 +64,11 @@ set fileformats=unix,dos,mac
 " バックスペースでインデントや改行を削除できるようにする
 set backspace=2
 " 括弧入力時に対応する括弧を表示 (noshowmatch:表示しない)
-set showmatch
-" 対応する括弧の表示時間を2にする
-set matchtime=2
+set noshowmatch
+" 対応する括弧の表示時間
+set matchtime=0
+" MatchParenプラグインを読み込まない対応する括弧にジャンプ表示
+let loaded_matchparen = 1
 " コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
 set wildmenu
 " 入力されているテキストの最大幅
@@ -248,8 +250,8 @@ let g:netrw_mousemaps =0  "マウスのマップを無効にする
 "let php_folding=1 "クラスと関数の折りたたみを有効にする
 set matchpairs=(:),{:},[:],<:>
 "let b:match_words = '<:>,<div.*>:</div>'
-"let b:match_words = "if:endif,foreach:endforeach,\<begin\>:\<end\>"
-let b:match_ignorecase = 1
+"let b:match_words = 'if:endif,foreach:endforeach,\<begin\>:\<end\>'
+"let b:match_ignorecase = 1
 
 """ 補完---------------------------------------------------------------------
 set omnifunc=syntaxcomplete#Complete
