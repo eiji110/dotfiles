@@ -247,8 +247,8 @@ let g:netrw_mousemaps =0  "マウスのマップを無効にする
 "let php_noShortTags=1 "ショートタグ(<?を無効にする→ハイライト除外にする)
 "let php_folding=1 "クラスと関数の折りたたみを有効にする
 set matchpairs=(:),{:},[:],<:>
-let b:match_words = '<:>,<div.*>:</div>'
-let b:match_words = "if:endif,foreach:endforeach,\<begin\>:\<end\>"
+"let b:match_words = '<:>,<div.*>:</div>'
+"let b:match_words = "if:endif,foreach:endforeach,\<begin\>:\<end\>"
 let b:match_ignorecase = 1
 
 """ 補完---------------------------------------------------------------------
