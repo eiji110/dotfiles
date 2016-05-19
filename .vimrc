@@ -40,7 +40,7 @@ NeoBundleCheck
 source $VIMRUNTIME/macros/matchit.vim
 "-init----------------------------------------------------------------------
 "leaderをスペースに変更
-let mapleader=" "
+"let mapleader=" "
 "---------------------------------------------------------------------------
 " 検索の挙動に関する設定:
 
@@ -292,13 +292,13 @@ set shortmess+=I
 
 "キーマップ ------------------------------------------------------------------------------
 " 新規タブで.vimrcを開く
-nnoremap <Leader>. :<C-u>tabedit $MYVIMRC<CR>
+nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
 "
 " omni補完
 imap <C-Space> <C-x><C-o>
 
 " netrw
-noremap <Leader>f :<C-u>Explore<CR>
+noremap <Space>f :<C-u>Explore<CR>
 
 " outline
 autocmd FileType qf nnoremap <silent><buffer> <C-o> <CR>:<C-u>cclose<CR>
@@ -313,9 +313,9 @@ function! s:eu_outline_setting_markdown()
 endfunction
 
 " date 入力
-noremap <Leader>d <ESC>a<C-R>=strftime("%Y/%m/%d (%a)")<ESC><ESC>
+noremap <Space>d <ESC>a<C-R>=strftime("%Y/%m/%d (%a)")<ESC><ESC>
 " time 入力
-noremap <Leader>t <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M")<ESC><ESC>
+noremap <Space>t <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M")<ESC><ESC>
 
 
 " Plugin
