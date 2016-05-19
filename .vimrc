@@ -319,42 +319,6 @@ noremap <Leader>t <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M")<ESC><ESC>
 
 
 " Plugin
-"""--------------------------------------------------------------------------
-""" Unite.vim
-"""--------------------------------------------------------------------------
-
-" 起動時にインサートモードで開始か
-let g:unite_enable_start_insert = 1
-" ヤンク履歴を有効にするか
-let g:unite_source_history_yank_enable =1  "history/yankの有効化
-
-" インサート／ノーマルどちらからでも呼び出せるようにキーマップ
-" ファイル一覧
-"nnoremap <silent> <C-f> :UniteWithBufferDir -buffer-name=files file<CR>
-"inoremap <silent> <C-f> <ESC>:UniteWithBufferDir -buffer-name=files file<CR>
-" バッファ一覧
-nnoremap <silent> <C-b> :<C-u>Unite buffer bookmark file_mru<CR>
-inoremap <silent> <C-b> <ESC>:<C-u>Unite buffer bookmark file_mru <CR>
-
-" レジスタ一覧
-" noremap <C-y> :Unite -buffer-name=register register<CR>
-inoremap <C-y> <ESC>:<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> <C-y> :<C-u>Unite history/yank<CR>
-
-" unite.vim上でのキーマッピング
-autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings()
-  " 単語単位からパス単位で削除するように変更
-  imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
-  " ESCキーを2回押すと終了する
-  nnoremap <silent><buffer> <ESC><ESC> :<C-u>q<CR>
-  inoremap <silent><buffer> <ESC><ESC> <ESC>:<C-u>q<CR>
-endfunction
-
-nnoremap <silent> <Leader>ug :Unite grep:%:-iHRn<CR>
-""" unite-outline------------------------------------------------------------------
-"nnoremap <silent> <C-o> :<C-u>Unite outline<CR>
-"inoremap <silent> <C-o> <ESC>:<C-u>Unite outline<CR>
 
 """--------------------------------------------------------------------------
 """ その他プラグイン
