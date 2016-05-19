@@ -298,7 +298,7 @@ nnoremap <Leader>. :<C-u>tabedit $MYVIMRC<CR>
 imap <C-Space> <C-x><C-o>
 
 " netrw
-noremap <C-f> :<C-u>Explore<CR>
+noremap <Leader>f :<C-u>Explore<CR>
 
 " outline
 autocmd FileType qf nnoremap <silent><buffer> <C-o> <CR>:<C-u>cclose<CR>
