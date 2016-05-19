@@ -301,15 +301,15 @@ imap <C-Space> <C-x><C-o>
 noremap <Space>f :<C-u>Explore<CR>
 
 " outline
-autocmd FileType qf nnoremap <silent><buffer> <C-o> <CR>:<C-u>cclose<CR>
+autocmd FileType qf nnoremap <silent><buffer> <Space>o <CR>:<C-u>cclose<CR>
 
-autocmd FileType php noremap <silent><buffer> <C-o> :<C-u>vimgrep /function/ % \| cw<CR><C-w>b
-autocmd FileType javascript noremap <silent><buffer> <C-o> :<C-u>vimgrep /^\s*function/ % \| cw<CR><C-w>b
-autocmd FileType sql noremap <silent><buffer> <C-o> :<C-u>vimgrep /\(\/\*\\|--\)/ % \| cw<CR><C-w>b
+autocmd FileType php noremap <silent><buffer> <Space>o :<C-u>vimgrep /function/ % \| cw<CR><C-w>b
+autocmd FileType javascript noremap <silent><buffer> <Space>o :<C-u>vimgrep /^\s*function/ % \| cw<CR><C-w>b
+autocmd FileType sql noremap <silent><buffer> <Space>o :<C-u>vimgrep /\(\/\*\\|--\)/ % \| cw<CR><C-w>b
 autocmd FileType markdown call s:eu_outline_setting_markdown()
 
 function! s:eu_outline_setting_markdown()
-    noremap <silent><buffer> <C-o> :<C-u>vimgrep /^#/ % \| cw<CR><C-w>b
+    noremap <silent><buffer> <Space>o :<C-u>vimgrep /^#/ % \| cw<CR><C-w>b
 endfunction
 
 " date “ü—Í
