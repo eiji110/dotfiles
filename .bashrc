@@ -3,6 +3,8 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+PATH=$PATH:~/local/bin:~/.composer/vendor/bin
+
 # ll ls
 if [ $(uname) = "Darwin" ]; then
     alias ll="ls -laG"

@@ -351,6 +351,8 @@ let g:syntastic_mode_map = { 'mode': 'active',
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_javascript_checker = 'jshint'
 let g:syntastic_java_checker = "javac"
+let g:syntastic_php_checkers = ['phpcs']
+let g:syntastic_php_phpcs_args = '--standard=psr2'
 "npm install -g jshint
 
 ""外部ファイル読み込み
