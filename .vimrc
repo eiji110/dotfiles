@@ -347,12 +347,15 @@ let g:ref_phpmanual_path = $HOME.'/.vim/ref/php-chunked-xhtml'
 """ syntastic-----------------------------------------------------------------------------
 let g:syntastic_mode_map = { 'mode': 'active',
   \ 'active_filetypes': [],
-  \ 'passive_filetypes': ['html'] }
+  \ 'passive_filetypes': ['html','php'] }
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_javascript_checker = 'jshint'
 let g:syntastic_java_checker = "javac"
 let g:syntastic_php_checkers = ['phpcs']
 let g:syntastic_php_phpcs_args = '--standard=psr2'
+
+noremap <Space>c :<C-u>SyntasticCheck<CR>
+
 "npm install -g jshint
 
 ""外部ファイル読み込み
