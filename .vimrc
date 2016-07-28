@@ -24,6 +24,7 @@ NeoBundle 'vim-scripts/vcscommand.vim'
 NeoBundle 'Align'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'vim-jp/vimdoc-ja'
+NeoBundle 'thinca/vim-quickrun'
 
 NeoBundle 'evidens/vim-twig'
 
