@@ -301,6 +301,9 @@ imap <C-Space> <C-x><C-o>
 " netrw
 noremap <Space>f :<C-u>Explore<CR>
 
+" netrw
+noremap <Space>c :<C-u>SyntasticCheck<CR>
+
 " outline
 autocmd FileType qf nnoremap <silent><buffer> <Space>o <CR>:<C-u>cclose<CR>
 
