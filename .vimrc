@@ -305,7 +305,7 @@ noremap <Space>f :<C-u>Explore<CR>
 noremap <Space>c :<C-u>SyntasticCheck<CR>
 
 " quickrun
-noremap <Space>q :<C-u>new<CR>:setfiletype bash<CR>
+noremap <Space>q :<C-u>tabnew<CR>:setfiletype bash<CR>
 
 " outline
 autocmd FileType qf nnoremap <silent><buffer> <Space>o <CR>:<C-u>cclose<CR>
