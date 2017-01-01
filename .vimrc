@@ -319,6 +319,25 @@ function! s:eu_outline_setting_markdown()
     noremap <silent><buffer> <Space>o :<C-u>vimgrep /^#/ % \| cw<CR><C-w>b
 endfunction
 
+" todo&done
+"
+function! EuTodoToggleCheckbox()
+    let l:line = getline('.')
+    if l:line =~ '\-\s\[\s\]'
+        " Š®—¹‚ğ‘}“ü‚·‚é
+        let l:result = substitute(l:line, '-\s\[\s\]', '- [x] [' . strftime("%Y/%m/%d %H:%M") . ']', '')
+        call setline('.', l:result)
+    elseif l:line =~ '\-\s\[x\]'
+        let l:result = substitute(l:line, '-\s\[x\]', '- [ ]', '')
+        let l:result = substitute(l:result, '\s\[\d\{4}.\+]', '', '')
+        call setline('.', l:result)
+    else
+        let l:result = substitute(l:line, '^', '- [ ] ', '')
+        call setline('.', l:result)
+    end
+endfunction
+autocmd FileType markdown noremap <silent><buffer> <Space>td :call EuTodoToggleCheckbox()<CR>
+
 " date “ü—Í
 noremap <Space>d <ESC>a<C-R>=strftime("%Y/%m/%d (%a)")<ESC><ESC>
 " time “ü—Í
