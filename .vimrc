@@ -323,11 +323,11 @@ endfunction
 "
 function! EuTodoToggleCheckbox()
     let l:line = getline('.')
-    if l:line =~ '[*+-]\s\[\s\]'
+    if l:line =~ '^\s*[*+-]\s\[\s\]'
         " 完了時刻を挿入する
         let l:result = substitute(l:line, '[*+-]\s\[\s\]', '- [x] [' . strftime("%Y/%m/%d %H:%M") . ']', '')
         call setline('.', l:result)
-    elseif l:line =~ '[*+-]\s\[x\]'
+    elseif l:line =~ '^\s*[*+-]\s\[x\]'
         let l:result = substitute(l:line, '[*+-]\s\[x\]', '- [ ]', '')
         let l:result = substitute(l:result, '\s\[\d\{4}.\+]', '', '')
         call setline('.', l:result)
@@ -338,24 +338,25 @@ function! EuTodoToggleCheckbox()
 endfunction
 function! EuTodoToggleLimitTime()
     let l:line = getline('.')
-    if l:line =~ '\s(*\d\{4}.\+)$'
-        let l:result = substitute(l:line, '\s(\d\{4}.\+)$', '', '')
+    if l:line =~ '^\s*[*+-]\s\[\s\]\s(*\d\{4}.\+)'
+        let l:result = substitute(l:line, '\s(\d\{4}.\+)', '', '')
         call setline('.', l:result)
-    else
+    elseif l:line =~ '^\s*[*+-]\s\[\s\]'
         " 今日を期限にする
-        let l:result = substitute(l:line, '$', ' (' . strftime("%Y/%m/%d %H:%M") . ')', '')
+        let l:result = substitute(l:line, '[*+-]\s\[ \]', '- [ ] (' . strftime("%Y/%m/%d") . ')', '')
         call setline('.', l:result)
     end
 endfunction
 autocmd FileType markdown noremap <silent><buffer> <Space>td :call EuTodoToggleCheckbox()<CR>
 autocmd FileType markdown noremap <silent><buffer> <Space>tl :call EuTodoToggleLimitTime()<CR>
-autocmd FileType markdown noremap <silent><buffer> <Space>ta :<C-u>vimgrep /\s(\d\{4}.\+)$/ % \| cw<CR><C-w>b
+autocmd FileType markdown noremap <silent><buffer> <Space>ta :<C-u>vimgrep /\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/ % \| cw<CR><C-w>b
 autocmd FileType markdown noremap <silent><buffer> <Space>ts :<C-u>sort /\s*[*+-]\s\[x\]\s/<CR>
+"autocmd FileType markdown noremap <silent><buffer> <Space>ts :<C-u>sort! /\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/ r<CR>:sort /\s*[*+-]\s\[x\]\s/<CR>
 
 " date 入力
-noremap <Space>d <ESC>a<C-R>=strftime("%Y/%m/%d (%a)")<ESC><ESC>
+noremap <Space>id <ESC>a<C-R>=strftime("%Y/%m/%d (%a)")<ESC><ESC>
 " time 入力
-noremap <Space>t <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M")<ESC><ESC>
+noremap <Space>it <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M")<ESC><ESC>
 
 
 " Plugin
