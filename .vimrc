@@ -12,7 +12,7 @@ filetype off
 if has('vim_starting')
   set runtimepath +=$HOME/.vim/bundle/neobundle.vim
 endif
-call neobundle#begin(expand('‾/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " 使いたいプラグインのリポジトリ
 NeoBundle 'mattn/webapi-vim'
@@ -267,7 +267,7 @@ autocmd FileType c setlocal omnifunc=ccomplete#Complete
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 """ 辞書---------------------------------------------------------------------
-autocmd FileType php :setlocal dictionary=‾/.vim/dict/php.dict
+autocmd FileType php :setlocal dictionary=~/.vim/dict/php.dict
 """ ヘルプ-------------------------------------------------------------------
 set helplang=ja,en
 
@@ -400,8 +400,8 @@ noremap <Space>c :<C-u>SyntasticCheck<CR>
 "npm install -g jshint
 
 ""外部ファイル読み込み
-if filereadable(expand('‾/.vimrc.local'))
-	source ‾/.vimrc.local
+if filereadable(expand('~/.vimrc.local'))
+	source ~/.vimrc.local
 endif
 ""------euoutline----------------------------
 " Vimのバージョンで分岐
@@ -493,7 +493,7 @@ endif
 "" autocmd FileType javascript setlocal noexpandtab tabstop=4 shiftwidth=4
 
 " 環境依存や非公開設定ファイルの読み込み
-if filereadable(expand('‾/.vimrc.local'))
-source ‾/.vimrc.local
+if filereadable(expand('~/.vimrc.local'))
+source ~/.vimrc.local
 endif
 
