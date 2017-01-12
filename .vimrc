@@ -368,7 +368,7 @@ noremap <Space>it <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M")<ESC><ESC>
 """ syntastic-----------------------------------------------------------------------------
 let g:syntastic_mode_map = { 'mode': 'active',
 \ 'active_filetypes': [],
-\ 'passive_filetypes': ['html','php','ruby'] }
+\ 'passive_filetypes': ['html','php','ruby','javascript'] }
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_javascript_checker = 'jshint'
 let g:syntastic_java_checker = "javac"
