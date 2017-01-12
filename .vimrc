@@ -365,135 +365,31 @@ noremap <Space>it <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M")<ESC><ESC>
 """ その他プラグイン
 """--------------------------------------------------------------------------
 
-"""vim-ref----------------------------------------------------------------------
-let g:ref_source_webdict_sites = {
-\   'wikipedia:ja': 'http://ja.wikipedia.org/wiki/%s',
-\   'wiktionary': {
-\     'url': 'http://ja.wiktionary.org/wiki/%s',
-\     'keyword_encoding': 'utf-8',
-\     'cache': 1,
-\   },
-\   'alc': {
-\     'url': 'http://eow.alc.co.jp/search?q=%s',
-\     'keyword_encoding': 'utf-8',
-\     'cache': 1 ,
-\     'line': 38 ,
-\   },
-\ }
-let g:ref_source_webdict_sites.default = 'alc'
-
-let g:ref_phpmanual_path = $HOME.'/.vim/ref/php-chunked-xhtml'
-" clojure erlang man perldoc phpmanual pydoc refe
-
 """ syntastic-----------------------------------------------------------------------------
 let g:syntastic_mode_map = { 'mode': 'active',
 \ 'active_filetypes': [],
-\ 'passive_filetypes': ['html','php'] }
+\ 'passive_filetypes': ['html','php','ruby'] }
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_javascript_checker = 'jshint'
 let g:syntastic_java_checker = "javac"
 let g:syntastic_php_checkers = ['phpcs']
 let g:syntastic_php_phpcs_args = '--standard=psr2'
+let g:syntastic_ruby_checkers = ['rubocop']
 
 noremap <Space>c :<C-u>SyntasticCheck<CR>
-
+""jshint
 "npm install -g jshint
 
-""外部ファイル読み込み
-if filereadable(expand('~/.vimrc.local'))
-	source ~/.vimrc.local
-endif
-""------euoutline----------------------------
-" Vimのバージョンで分岐
-""if version >= 700
-" Vim 7.0用のコード
-" elseif version >= 701
-" Vim 7.1用のコード
-" elseif version >= 702
-" Vim 7.2用のコード
-" endif
-"
-" OSで分岐
-"
-" has()を使う。
-" 正しい結果を返してくれなくても泣かない。
-"
-" if has("unix")
-"" UNIX環境用のコード
-" elsef has('mac')
-" " Mac用のコード
-" elseif has("win32")
-" " Windows環境用のコード
-" endif
-"
-" GUIか、CUIかで分岐
-"
-" gui_runningをチェックする。
-"
-" if has("gui_running")
-"" GUI版Vim用のコード
-" else
-"" CUI版Vim用のコード
-" endif
-"
-" コンパイルオプションなどで分岐
-"
-" 同じく、has()を使う。
-"
-" :version
-"" #=> VIM - Vi IMproved 7.2 (2008 Aug 9,
-" compiled Mar 25 2010 01:10:31)
-"" #=> MS-Windows 64 ビット GUI 版
-"" #=> 適用済パッチ: 1-411
-"" #=> Modified by koron.kaoriya@gmail.com
-"" #=> Compiled by koron.kaoriya@gmail.com
-"" #=> Big 版 with GUI.  機能の一覧 有効
-" (+)/無効(-)
-"" #=> +arabic +autocmd +balloon_eval
-" +browse ++builtin_terms +byte_offset
-" +cindent +clientserver +clipboard
-" +cmdline_compl
-" " #=> +cmdline_hist +cmdline_info
-" +comments +cryptv +cscope +cursorshape
-" +dialog_con_gui +diff +digraphs -dnd
-" -ebcdic
-" " #=> +emacs_tags +eval +ex_extra
-" +extra_search +farsi +file_in_path
-" +find_in_path +float +folding -footer
-" +gettext/dyn
-" " #=> ....
-"
-" clipboardが使えるか、どうかで分岐
-"
-" if has("clipboard")
-" " clipboardを使うコード
-" endif
-"
-" 変数で分岐
-"
-" exists()を使う。
-" プラグインが入っているかいないか、の判断に使えることが多い。
-"
-" if exists("$LANG")
-" " LANG環境変数が設定されている場合のコード
-" endif
-"
-" event
-" augroup vimrc_loading
-"  autocmd!
-"  autocmd BufNewFile * put ='ﾋﾞﾑｩ'
-" augroup END
-""--------------------------ファイルの種類ごとの設定
-"" tabstop:ファイル内にあるタブ文字の表示幅。
-"" shiftwidth:自動インデントに使われる空白の数。
-"" softtabstop:タブキー押下時に挿入される文字幅を指定。(0の場合「tabstop」で指定されている数値が使用される)
-"" expandtab:ソフトタブ。ハードタブはnoexpandtab。
+""rubocop
+"gem install rubocop
+"use bundler in Gemfile
+"gem 'rubocop', require: false
 
-"" javascript
-"" autocmd FileType javascript setlocal noexpandtab tabstop=4 shiftwidth=4
+"php_codesniffer
+"composer global require "squizlabs/php_codesniffer=*"
 
 " 環境依存や非公開設定ファイルの読み込み
 if filereadable(expand('~/.vimrc.local'))
-source ~/.vimrc.local
+    source ~/.vimrc.local
 endif
 
