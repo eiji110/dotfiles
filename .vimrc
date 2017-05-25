@@ -358,6 +358,17 @@ noremap <Space>id <ESC>a<C-R>=strftime("%Y/%m/%d (%a)")<ESC><ESC>
 " time 入力
 noremap <Space>it <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M")<ESC><ESC>
 
+" feed reader
+"
+let g:eu_feed_reader_feedfilelist_path = ['rubocop']
+function! EuFeedReaderShowFeed()
+let result = webapi#feed#parseURL("http://d.hatena.ne.jp/osyo-manga/rss")
+for item in result
+        echo item.title
+    endfor
+endfunction
+noremap <Space>rf :<C-u>call EuFeedReaderShowFeed()<CR>
+
 
 " Plugin
 
@@ -387,6 +398,8 @@ noremap <Space>c :<C-u>SyntasticCheck<CR>
 
 "php_codesniffer
 "composer global require "squizlabs/php_codesniffer=*"
+
+""" webapi-----------------------------------------------------------------------------
 
 " 環境依存や非公開設定ファイルの読み込み
 if filereadable(expand('~/.vimrc.local'))
