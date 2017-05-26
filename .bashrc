@@ -14,8 +14,5 @@ elif [ $(uname) = "Linux" ]; then
     alias ls="ls --color=auto"
 fi
 
-# vi
-alias vi='vim'
-
 # User specific aliases and functions
 stty stop undef
