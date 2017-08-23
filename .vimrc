@@ -386,6 +386,11 @@ let g:syntastic_java_checker = "javac"
 let g:syntastic_php_checkers = ['phpcs']
 let g:syntastic_php_phpcs_args = '--standard=psr2'
 let g:syntastic_ruby_checkers = ['rubocop']
+if filereadable(expand('~/.composer/vendor/bin/twig-lint'))
+  "" composer global require "asm89/twig-lint" "@stable"
+    let g:syntastic_twig_twiglint_exec = '~/.composer/vendor/bin/twig-lint'
+    let g:syntastic_twig_twiglint_exe = '~/.composer/vendor/bin/twig-lint'
+endif
 
 noremap <Space>c :<C-u>SyntasticCheck<CR>
 ""jshint
