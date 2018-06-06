@@ -3,6 +3,10 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+if [ -f ~/.bashrc_local ]; then
+    . ~/.bashrc_local
+fi
+
 PATH=$PATH:~/local/bin:~/.composer/vendor/bin
 
 # ll ls
