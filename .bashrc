@@ -10,7 +10,7 @@ fi
 PATH=$PATH:~/local/bin:~/.composer/vendor/bin
 
 # vim:shell
-alias vimpath="echo ${VIM}"
+alias vimpath='echo "echo \${VIM} ${VIM}"'
 
 # ll ls
 if [ $(uname) = "Darwin" ]; then
