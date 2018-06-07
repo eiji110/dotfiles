@@ -9,6 +9,9 @@ fi
 
 PATH=$PATH:~/local/bin:~/.composer/vendor/bin
 
+# vim:shell
+alias vimpath="echo ${VIM}"
+
 # ll ls
 if [ $(uname) = "Darwin" ]; then
     alias ll="ls -laG"
