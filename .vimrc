@@ -311,7 +311,7 @@ noremap <Space>q :<C-u>tabnew<CR>:setfiletype bash<CR>
 autocmd FileType qf nnoremap <silent><buffer> <Space>o <CR>:<C-u>cclose<CR>
 
 autocmd FileType php noremap <silent><buffer> <Space>o :<C-u>vimgrep /function/ % \| cw<CR><C-w>b
-autocmd FileType ruby noremap <silent><buffer> <Space>o :<C-u>vimgrep /def/ % \| cw<CR><C-w>b
+autocmd FileType ruby noremap <silent><buffer> <Space>o :<C-u>vimgrep /\(def\\|desc\)/ % \| cw<CR><C-w>b
 autocmd FileType javascript noremap <silent><buffer> <Space>o :<C-u>vimgrep /^\s*function/ % \| cw<CR><C-w>b
 autocmd FileType sql noremap <silent><buffer> <Space>o :<C-u>vimgrep /\(\/\*\\|--\)/ % \| cw<CR><C-w>b
 autocmd FileType markdown call s:eu_outline_setting_markdown()
