@@ -348,9 +348,18 @@ function! EuTodoToggleLimitTime()
         call setline('.', l:result)
     end
 endfunction
+function! EuTodoAgenda()
+    " execute 'vimgrep' '/\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/' '%'
+    execute 'vimgrep' '/\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/' '%'
+    call setqflist(sort(getqflist(), 's:EuTodoAgendaSort'))
+    execute 'cw'
+endfunction
+function! s:EuTodoAgendaSort(e1, e2)
+endfunction
 autocmd FileType markdown noremap <silent><buffer> <Space>td :call EuTodoToggleCheckbox()<CR>
 autocmd FileType markdown noremap <silent><buffer> <Space>tl :call EuTodoToggleLimitTime()<CR>
-autocmd FileType markdown noremap <silent><buffer> <Space>ta :<C-u>vimgrep /\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/ % \| cw<CR><C-w>b
+" autocmd FileType markdown noremap <silent><buffer> <Space>ta :<C-u>vimgrep /\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/ % \| cw<CR><C-w>b
+autocmd FileType markdown noremap <silent><buffer> <Space>ta :call EuTodoAgenda()<CR><C-w>b
 autocmd FileType markdown noremap <silent><buffer> <Space>ts :<C-u>sort /\s*[*+-]\s\[x\]\s/<CR>
 "autocmd FileType markdown noremap <silent><buffer> <Space>ts :<C-u>sort! /\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/ r<CR>:sort /\s*[*+-]\s\[x\]\s/<CR>
 
