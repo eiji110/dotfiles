@@ -17,6 +17,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " 使いたいプラグインのリポジトリ
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'rcmdnk/vim-markdown'
+NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'vim-scripts/sudo.vim'
 NeoBundle 'scrooloose/syntastic'
