@@ -293,6 +293,14 @@ set shortmess+=I
 " プラグインなど後付けの機能に割り当てる場合はmapを使う。
 
 "キーマップ ------------------------------------------------------------------------------
+"コマンドラインでbash的なキーバインド
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-n> <Down>
+cnoremap <C-p> <Up>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-d> <Del>
 " 新規タブで.vimrcを開く
 nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
 "
