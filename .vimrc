@@ -26,6 +26,7 @@ NeoBundle 'Align'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'sgur/vim-editorconfig'
 
 NeoBundle 'evidens/vim-twig'
 
