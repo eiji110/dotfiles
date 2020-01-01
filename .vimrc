@@ -27,6 +27,8 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'sgur/vim-editorconfig'
+NeoBundle 'fuenor/qfixgrep'
+NeoBundle 'fuenor/qfixhowm'
 
 NeoBundle 'evidens/vim-twig'
 
@@ -38,6 +40,29 @@ call neobundle#end()
 filetype plugin indent on
 
 NeoBundleCheck
+
+" qfixhowm----------------------------------------------------------
+" " howm_dirはファイルを保存したいディレクトリを設定
+" キーマップリーダー
+let QFixHowm_Key = 'g'
+
+" howm_dirはファイルを保存したいディレクトリを設定
+let howm_dir             = '~/memo/'
+let howm_filename        = '%Y/%m/%Y-%m-%d-%H%M%S.txt'
+let howm_fileencoding    = 'utf-8'
+let howm_fileformat      = 'unix'
+" ファイル拡張子をmdにする
+let howm_filename = '%Y/%m/%Y-%m-%d-%H%M%S.md'
+" ファイルタイプをmarkdownにする
+let QFixHowm_FileType = 'markdown'
+" タイトル記号
+let QFixHowm_Title = '#'
+" タイトル行検索正規表現の辞書を初期化
+let QFixMRU_Title = {}
+" MRUでタイトル行とみなす正規表現(Vimの正規表現で指定)
+let QFixMRU_Title['mkd'] = '^###[^#]'
+" grepでタイトル行とみなす正規表現(使用するgrepによっては変更する必要があります)
+let QFixMRU_Title['mkd_regxp'] = '^###[^#]'
 
 " その他プラグイン----------------------------------------------------------
 source $VIMRUNTIME/macros/matchit.vim
