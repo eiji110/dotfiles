@@ -48,11 +48,11 @@ let QFixHowm_Key = 'g'
 
 " howm_dirはファイルを保存したいディレクトリを設定
 let howm_dir             = '~/memo/'
-let howm_filename        = '%Y/%m/%Y-%m-%d-%H%M%S.txt'
+"予定・TODOの検索場所指定
+let QFixHowm_ScheduleSearchDir = howm_dir.'/.todos'
 let howm_fileencoding    = 'utf-8'
 let howm_fileformat      = 'unix'
-" ファイル拡張子をmdにする
-let howm_filename = '%Y/%m/%Y-%m-%d-%H%M%S.md'
+let howm_filename        = '%Y/%m/%Y-%m-%d-%H%M%S.md'
 " ファイルタイプをmarkdownにする
 let QFixHowm_FileType = 'markdown'
 " タイトル記号
@@ -63,6 +63,30 @@ let QFixMRU_Title = {}
 let QFixMRU_Title['mkd'] = '^###[^#]'
 " grepでタイトル行とみなす正規表現(使用するgrepによっては変更する必要があります)
 let QFixMRU_Title['mkd_regxp'] = '^###[^#]'
+
+",yでの予定表示期間
+let QFixHowm_ShowSchedule     = 31
+"",tでの予定表示期間
+let QFixHowm_ShowScheduleTodo = 10
+",,での予定表示期間
+let QFixHowm_ShowScheduleMenu = 31
+"
+"",y で表示される予定・TODOパターン
+let QFixHowm_ListReminder_ScheExt = '[@!.]'
+",t で表示される予定・TODOパターン
+let QFixHowm_ListReminder_TodoExt = '[-@+!~.]'
+"",, で表示される予定・TODOパターン
+let QFixHowm_ListReminder_MenuExt = '[-@+!~.]'
+"予定
+let QFixHowm_ReminderDefault_Schedule = 0
+"締め切り
+let QFixHowm_ReminderDefault_Deadline = 30
+"TODO
+let QFixHowm_ReminderDefault_Todo     = 30
+"リマインダ
+let QFixHowm_ReminderDefault_Reminder = 1
+"浮沈TODO
+let QFixHowm_ReminderDefault_UD       = 30
 
 " その他プラグイン----------------------------------------------------------
 source $VIMRUNTIME/macros/matchit.vim
@@ -359,16 +383,14 @@ endfunction
 "
 function! EuTodoToggleCheckbox()
     let l:line = getline('.')
-    if l:line =~ '^\s*[*+-]\s\[\s\]'
-        " 完了時刻を挿入する
-        let l:result = substitute(l:line, '[*+-]\s\[\s\]', '- [x] [' . strftime("%Y/%m/%d %H:%M") . ']', '')
+    if l:line =~ '^\s*\[.+\]!\s'
+        let l:result = substitute(l:line, ']!\s', ']. ', '')
         call setline('.', l:result)
-    elseif l:line =~ '^\s*[*+-]\s\[x\]'
-        let l:result = substitute(l:line, '[*+-]\s\[x\]', '- [ ]', '')
-        let l:result = substitute(l:result, '\s\[\d\{4}.\+]', '', '')
+    elseif l:line =~ '^\s*\[.+\]\.\s'
+        let l:result = substitute(l:line, ']\.\s', ']! ', '')
         call setline('.', l:result)
     else
-        let l:result = substitute(l:line, '^', '- [ ] ', '')
+        let l:result = substitute(l:line, '^', '[' . strftime("%Y-%m-%d") . ']! ', '')
         call setline('.', l:result)
     end
 endfunction
