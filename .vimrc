@@ -25,6 +25,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'sgur/vim-editorconfig'
+NeoBundle 'dhruvasagar/vim-table-mode'
 
 NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'rcmdnk/vim-markdown'
@@ -349,7 +350,6 @@ endfunction
 autocmd FileType markdown noremap <silent><buffer> <Space>td :call EuTodoToggleCheckbox()<CR>
 autocmd FileType markdown noremap <silent><buffer> <Space>ta :<C-u>vimgrep /^\s*[0-9*+ -]*\[[xX ]\]/ % \| cw<CR><C-w>b
 "autocmd FileType markdown noremap <silent><buffer> <Space>ts :<C-u>sort /\s*[*+-]\s\[x\]\s/<CR>
-autocmd FileType markdown noremap <silent><buffer> <Space>tb :call append(line("."), "\|-----------\|------------\|------------\|")<CR>
 autocmd FileType markdown noremap <silent><buffer> <Space>tt :call append(line("."), strftime("[%Y-%m-%d %H:%M]"))<CR>
 
 " date 入力
@@ -409,4 +409,6 @@ noremap <Space>c :<C-u>SyntasticCheck<CR>
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
 endif
-
+""" vim-table-mode-----------------------------------------------------------------------------
+let g:table_mode_corner = '|'
+noremap <Space>tb :<C-u>TableModeToggle<CR>
