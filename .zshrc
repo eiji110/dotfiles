@@ -1,7 +1,11 @@
 export LANG=ja_JP.UTF-8
 
+# 補完機能を有効にする
+autoload -Uz compinit
+compinit
+
 ## 履歴の保存先
-HISTFILE=$HOME/.zsh-history
+HISTFILE=$HOME/.zsh_history
 ## メモリに展開する履歴の数
 HISTSIZE=100000
 ## 保存する履歴の数
@@ -84,3 +88,21 @@ setopt hist_no_store
 setopt list_packed
 ## 最後のスラッシュを自動的に削除しない
 setopt noautoremoveslash
+
+
+
+# OS 別の設定
+case ${OSTYPE} in
+    darwin*)
+        #Mac用の設定
+        ## Aliasの設定
+        alias ll='ls -laGa'
+        alias ls='ls -G'
+        ;;
+    linux*)
+        #Linux用の設定
+        ## Aliasの設定
+        alias ll='ls -la --color=auto'
+        alias ls='ls --color=auto'
+        ;;
+esac
