@@ -373,50 +373,30 @@ autocmd FileType php noremap <silent><buffer> <Space>o :<C-u>vimgrep /function/ 
 autocmd FileType ruby noremap <silent><buffer> <Space>o :<C-u>vimgrep /\(def\\|task\\|namespace\)/ % \| cw<CR><C-w>b
 autocmd FileType javascript noremap <silent><buffer> <Space>o :<C-u>vimgrep /^\s*function/ % \| cw<CR><C-w>b
 autocmd FileType sql noremap <silent><buffer> <Space>o :<C-u>vimgrep /\(\/\*\\|--\)/ % \| cw<CR><C-w>b
-autocmd FileType markdown call s:eu_outline_setting_markdown()
-
-function! s:eu_outline_setting_markdown()
-    noremap <silent><buffer> <Space>o :<C-u>vimgrep /^#/ % \| cw<CR><C-w>b
-endfunction
+autocmd FileType markdown noremap <silent><buffer> <Space>o :<C-u>vimgrep /^\s*#\+\s/ % \| cw<CR><C-w>b
 
 " todo&done
 "
 function! EuTodoToggleCheckbox()
     let l:line = getline('.')
-    if l:line =~ '^\s*\[.+\]!\s'
-        let l:result = substitute(l:line, ']!\s', ']. ', '')
+    if l:line =~ '\[\s\]\s'
+        let l:result = substitute(l:line, '\[\s\]\s', '[x] ', '')
         call setline('.', l:result)
-    elseif l:line =~ '^\s*\[.+\]\.\s'
-        let l:result = substitute(l:line, ']\.\s', ']! ', '')
+    elseif l:line =~ '\[[xX]\]\s'
+        let l:result = substitute(l:line, '\[[xX]\]\s', '[ ] ', '')
+        call setline('.', l:result)
+    elseif l:line =~ '^\s*[0-9*+-]+\s'
+        " listの後に項目を作成
+        let l:result = substitute(l:line, '^\s*[0-9*+-]+(\s)', '[ ] ', '')
         call setline('.', l:result)
     else
-        let l:result = substitute(l:line, '^', '[' . strftime("%Y-%m-%d") . ']! ', '')
+        " 項目を作成
+        let l:result = substitute(l:line, '^', '[ ] ', '')
         call setline('.', l:result)
     end
-endfunction
-function! EuTodoToggleLimitTime()
-    let l:line = getline('.')
-    if l:line =~ '^\s*[*+-]\s\[\s\]\s(*\d\{4}.\+)'
-        let l:result = substitute(l:line, '\s(\d\{4}.\+)', '', '')
-        call setline('.', l:result)
-    elseif l:line =~ '^\s*[*+-]\s\[\s\]'
-        " 今日を期限にする
-        let l:result = substitute(l:line, '[*+-]\s\[ \]', '- [ ] (' . strftime("%Y/%m/%d") . ')', '')
-        call setline('.', l:result)
-    end
-endfunction
-function! EuTodoAgenda()
-    " execute 'vimgrep' '/\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/' '%'
-    execute 'vimgrep' '/\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/' '%'
-    call setqflist(sort(getqflist(), 's:EuTodoAgendaSort'))
-    execute 'cw'
-endfunction
-function! s:EuTodoAgendaSort(e1, e2)
 endfunction
 autocmd FileType markdown noremap <silent><buffer> <Space>td :call EuTodoToggleCheckbox()<CR>
-autocmd FileType markdown noremap <silent><buffer> <Space>tl :call EuTodoToggleLimitTime()<CR>
-" autocmd FileType markdown noremap <silent><buffer> <Space>ta :<C-u>vimgrep /\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/ % \| cw<CR><C-w>b
-autocmd FileType markdown noremap <silent><buffer> <Space>ta :call EuTodoAgenda()<CR><C-w>b
+autocmd FileType markdown noremap <silent><buffer> <Space>ta :<C-u>vimgrep /^\s*[0-9*+ -]*\[[xX ]\]/ % \| cw<CR><C-w>b
 autocmd FileType markdown noremap <silent><buffer> <Space>ts :<C-u>sort /\s*[*+-]\s\[x\]\s/<CR>
 "autocmd FileType markdown noremap <silent><buffer> <Space>ts :<C-u>sort! /\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/ r<CR>:sort /\s*[*+-]\s\[x\]\s/<CR>
 
