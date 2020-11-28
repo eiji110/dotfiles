@@ -387,7 +387,7 @@ function! EuTodoToggleCheckbox()
         call setline('.', l:result)
     elseif l:line =~ '^\s*[0-9*+-]+\s'
         " listの後に項目を作成
-        let l:result = substitute(l:line, '^\s*[0-9*+-]+(\s)', '[ ] ', '')
+        let l:result = substitute(l:line, '^\s*[0-9.*+-]+(\s)', '[ ] ', '')
         call setline('.', l:result)
     else
         " 項目を作成
@@ -397,8 +397,9 @@ function! EuTodoToggleCheckbox()
 endfunction
 autocmd FileType markdown noremap <silent><buffer> <Space>td :call EuTodoToggleCheckbox()<CR>
 autocmd FileType markdown noremap <silent><buffer> <Space>ta :<C-u>vimgrep /^\s*[0-9*+ -]*\[[xX ]\]/ % \| cw<CR><C-w>b
-autocmd FileType markdown noremap <silent><buffer> <Space>ts :<C-u>sort /\s*[*+-]\s\[x\]\s/<CR>
-"autocmd FileType markdown noremap <silent><buffer> <Space>ts :<C-u>sort! /\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/ r<CR>:sort /\s*[*+-]\s\[x\]\s/<CR>
+"autocmd FileType markdown noremap <silent><buffer> <Space>ts :<C-u>sort /\s*[*+-]\s\[x\]\s/<CR>
+autocmd FileType markdown noremap <silent><buffer> <Space>tb :call append(line("."), "\|-----------\|------------\|------------\|")<CR>
+autocmd FileType markdown noremap <silent><buffer> <Space>tt :call append(line("."), strftime("[%Y-%m-%d %H:%M]"))<CR>
 
 " date 入力
 noremap <Space>id <ESC>a<C-R>=strftime("%Y/%m/%d (%a)")<ESC><ESC>
