@@ -10,7 +10,7 @@ fi
 PATH=$PATH:~/local/bin:~/.composer/vendor/bin
 
 # grep
-export GREP_OPTIONS='--color=auto'
+# export GREP_OPTIONS='--color=auto'
 
 # vim:shell
 alias vimpath='echo "echo \${VIM} ${VIM}"'

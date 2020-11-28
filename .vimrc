@@ -48,11 +48,11 @@ let QFixHowm_Key = 'g'
 
 " howm_dirはファイルを保存したいディレクトリを設定
 let howm_dir             = '~/memo/'
-let howm_filename        = '%Y/%m/%Y-%m-%d-%H%M%S.txt'
+"予定・TODOの検索場所指定
+let QFixHowm_ScheduleSearchDir = howm_dir.'/.todos'
 let howm_fileencoding    = 'utf-8'
 let howm_fileformat      = 'unix'
-" ファイル拡張子をmdにする
-let howm_filename = '%Y/%m/%Y-%m-%d-%H%M%S.md'
+let howm_filename        = '%Y/%m/%Y-%m-%d-%H%M%S.md'
 " ファイルタイプをmarkdownにする
 let QFixHowm_FileType = 'markdown'
 " タイトル記号
@@ -63,6 +63,30 @@ let QFixMRU_Title = {}
 let QFixMRU_Title['mkd'] = '^###[^#]'
 " grepでタイトル行とみなす正規表現(使用するgrepによっては変更する必要があります)
 let QFixMRU_Title['mkd_regxp'] = '^###[^#]'
+
+",yでの予定表示期間
+let QFixHowm_ShowSchedule     = 31
+"",tでの予定表示期間
+let QFixHowm_ShowScheduleTodo = 10
+",,での予定表示期間
+let QFixHowm_ShowScheduleMenu = 31
+"
+"",y で表示される予定・TODOパターン
+let QFixHowm_ListReminder_ScheExt = '[@!.]'
+",t で表示される予定・TODOパターン
+let QFixHowm_ListReminder_TodoExt = '[-@+!~.]'
+"",, で表示される予定・TODOパターン
+let QFixHowm_ListReminder_MenuExt = '[-@+!~.]'
+"予定
+let QFixHowm_ReminderDefault_Schedule = 0
+"締め切り
+let QFixHowm_ReminderDefault_Deadline = 30
+"TODO
+let QFixHowm_ReminderDefault_Todo     = 30
+"リマインダ
+let QFixHowm_ReminderDefault_Reminder = 1
+"浮沈TODO
+let QFixHowm_ReminderDefault_UD       = 30
 
 " その他プラグイン----------------------------------------------------------
 source $VIMRUNTIME/macros/matchit.vim
@@ -349,52 +373,30 @@ autocmd FileType php noremap <silent><buffer> <Space>o :<C-u>vimgrep /function/ 
 autocmd FileType ruby noremap <silent><buffer> <Space>o :<C-u>vimgrep /\(def\\|task\\|namespace\)/ % \| cw<CR><C-w>b
 autocmd FileType javascript noremap <silent><buffer> <Space>o :<C-u>vimgrep /^\s*function/ % \| cw<CR><C-w>b
 autocmd FileType sql noremap <silent><buffer> <Space>o :<C-u>vimgrep /\(\/\*\\|--\)/ % \| cw<CR><C-w>b
-autocmd FileType markdown call s:eu_outline_setting_markdown()
-
-function! s:eu_outline_setting_markdown()
-    noremap <silent><buffer> <Space>o :<C-u>vimgrep /^#/ % \| cw<CR><C-w>b
-endfunction
+autocmd FileType markdown noremap <silent><buffer> <Space>o :<C-u>vimgrep /^\s*#\+\s/ % \| cw<CR><C-w>b
 
 " todo&done
 "
 function! EuTodoToggleCheckbox()
     let l:line = getline('.')
-    if l:line =~ '^\s*[*+-]\s\[\s\]'
-        " 完了時刻を挿入する
-        let l:result = substitute(l:line, '[*+-]\s\[\s\]', '- [x] [' . strftime("%Y/%m/%d %H:%M") . ']', '')
+    if l:line =~ '\[\s\]\s'
+        let l:result = substitute(l:line, '\[\s\]\s', '[x] ', '')
         call setline('.', l:result)
-    elseif l:line =~ '^\s*[*+-]\s\[x\]'
-        let l:result = substitute(l:line, '[*+-]\s\[x\]', '- [ ]', '')
-        let l:result = substitute(l:result, '\s\[\d\{4}.\+]', '', '')
+    elseif l:line =~ '\[[xX]\]\s'
+        let l:result = substitute(l:line, '\[[xX]\]\s', '[ ] ', '')
+        call setline('.', l:result)
+    elseif l:line =~ '^\s*[0-9*+-]+\s'
+        " listの後に項目を作成
+        let l:result = substitute(l:line, '^\s*[0-9*+-]+(\s)', '[ ] ', '')
         call setline('.', l:result)
     else
-        let l:result = substitute(l:line, '^', '- [ ] ', '')
+        " 項目を作成
+        let l:result = substitute(l:line, '^', '[ ] ', '')
         call setline('.', l:result)
     end
-endfunction
-function! EuTodoToggleLimitTime()
-    let l:line = getline('.')
-    if l:line =~ '^\s*[*+-]\s\[\s\]\s(*\d\{4}.\+)'
-        let l:result = substitute(l:line, '\s(\d\{4}.\+)', '', '')
-        call setline('.', l:result)
-    elseif l:line =~ '^\s*[*+-]\s\[\s\]'
-        " 今日を期限にする
-        let l:result = substitute(l:line, '[*+-]\s\[ \]', '- [ ] (' . strftime("%Y/%m/%d") . ')', '')
-        call setline('.', l:result)
-    end
-endfunction
-function! EuTodoAgenda()
-    " execute 'vimgrep' '/\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/' '%'
-    execute 'vimgrep' '/\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/' '%'
-    call setqflist(sort(getqflist(), 's:EuTodoAgendaSort'))
-    execute 'cw'
-endfunction
-function! s:EuTodoAgendaSort(e1, e2)
 endfunction
 autocmd FileType markdown noremap <silent><buffer> <Space>td :call EuTodoToggleCheckbox()<CR>
-autocmd FileType markdown noremap <silent><buffer> <Space>tl :call EuTodoToggleLimitTime()<CR>
-" autocmd FileType markdown noremap <silent><buffer> <Space>ta :<C-u>vimgrep /\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/ % \| cw<CR><C-w>b
-autocmd FileType markdown noremap <silent><buffer> <Space>ta :call EuTodoAgenda()<CR><C-w>b
+autocmd FileType markdown noremap <silent><buffer> <Space>ta :<C-u>vimgrep /^\s*[0-9*+ -]*\[[xX ]\]/ % \| cw<CR><C-w>b
 autocmd FileType markdown noremap <silent><buffer> <Space>ts :<C-u>sort /\s*[*+-]\s\[x\]\s/<CR>
 "autocmd FileType markdown noremap <silent><buffer> <Space>ts :<C-u>sort! /\s*[*+-]\s\[\s\]\s(\d\{4}.\+)/ r<CR>:sort /\s*[*+-]\s\[x\]\s/<CR>
 
