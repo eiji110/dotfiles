@@ -16,8 +16,6 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " 使いたいプラグインのリポジトリ
 NeoBundle 'mattn/webapi-vim'
-NeoBundle 'rcmdnk/vim-markdown'
-NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'vim-scripts/sudo.vim'
 NeoBundle 'scrooloose/syntastic'
@@ -27,9 +25,9 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'sgur/vim-editorconfig'
-NeoBundle 'fuenor/qfixgrep'
-NeoBundle 'fuenor/qfixhowm'
 
+NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'rcmdnk/vim-markdown'
 NeoBundle 'evidens/vim-twig'
 
 call neobundle#end()
@@ -40,53 +38,6 @@ call neobundle#end()
 filetype plugin indent on
 
 NeoBundleCheck
-
-" qfixhowm----------------------------------------------------------
-" " howm_dirはファイルを保存したいディレクトリを設定
-" キーマップリーダー
-let QFixHowm_Key = 'g'
-
-" howm_dirはファイルを保存したいディレクトリを設定
-let howm_dir             = '~/memo/'
-"予定・TODOの検索場所指定
-let QFixHowm_ScheduleSearchDir = howm_dir.'/.todos'
-let howm_fileencoding    = 'utf-8'
-let howm_fileformat      = 'unix'
-let howm_filename        = '%Y/%m/%Y-%m-%d-%H%M%S.md'
-" ファイルタイプをmarkdownにする
-let QFixHowm_FileType = 'markdown'
-" タイトル記号
-let QFixHowm_Title = '#'
-" タイトル行検索正規表現の辞書を初期化
-let QFixMRU_Title = {}
-" MRUでタイトル行とみなす正規表現(Vimの正規表現で指定)
-let QFixMRU_Title['mkd'] = '^###[^#]'
-" grepでタイトル行とみなす正規表現(使用するgrepによっては変更する必要があります)
-let QFixMRU_Title['mkd_regxp'] = '^###[^#]'
-
-",yでの予定表示期間
-let QFixHowm_ShowSchedule     = 31
-"",tでの予定表示期間
-let QFixHowm_ShowScheduleTodo = 10
-",,での予定表示期間
-let QFixHowm_ShowScheduleMenu = 31
-"
-"",y で表示される予定・TODOパターン
-let QFixHowm_ListReminder_ScheExt = '[@!.]'
-",t で表示される予定・TODOパターン
-let QFixHowm_ListReminder_TodoExt = '[-@+!~.]'
-"",, で表示される予定・TODOパターン
-let QFixHowm_ListReminder_MenuExt = '[-@+!~.]'
-"予定
-let QFixHowm_ReminderDefault_Schedule = 0
-"締め切り
-let QFixHowm_ReminderDefault_Deadline = 30
-"TODO
-let QFixHowm_ReminderDefault_Todo     = 30
-"リマインダ
-let QFixHowm_ReminderDefault_Reminder = 1
-"浮沈TODO
-let QFixHowm_ReminderDefault_UD       = 30
 
 " その他プラグイン----------------------------------------------------------
 source $VIMRUNTIME/macros/matchit.vim
