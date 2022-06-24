@@ -60,10 +60,10 @@ setopt print_eight_bit
 setopt share_history
 ## 補完候補のカーソル選択を有効に
 zstyle ':completion:*:default' menu select=1
-## 補完候補の色づけ
-eval `dircolors`
-export ZLS_COLORS=$LS_COLORS
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+### 補完候補の色づけ
+#eval `dircolors`
+#export ZLS_COLORS=$LS_COLORS
+#zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 ## ディレクトリ名だけで cd
 setopt auto_cd
 ## カッコの対応などを自動的に補完
@@ -106,3 +106,7 @@ case ${OSTYPE} in
         alias ls='ls --color=auto'
         ;;
 esac
+
+if [ -f ~/.zshrc_local ]; then
+    . ~/.zshrc_local
+fi
